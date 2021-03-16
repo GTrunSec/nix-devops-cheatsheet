@@ -35,6 +35,22 @@
         "type": "github"
       }
     },
+    "nix-script": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1615568787,
+        "narHash": "sha256-FUAAf/P0OfjvIzMtoBP2/oPz/CR4nC4+kKTw7LgKuDE=",
+        "owner": "BrianHicks",
+        "repo": "nix-script",
+        "rev": "676f8e39ce704faedcb60171792e3a223d02fd6d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "BrianHicks",
+        "repo": "nix-script",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1615709438,
@@ -54,6 +70,7 @@
       "inputs": {
         "easy-hls-nix": "easy-hls-nix",
         "flake-utils": "flake-utils",
+        "nix-script": "nix-script",
         "nixpkgs": "nixpkgs"
       }
     }
