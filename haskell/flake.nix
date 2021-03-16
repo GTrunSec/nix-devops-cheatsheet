@@ -1,5 +1,5 @@
 {
-  description = "python-develop";
+  description = "haskell-develop";
 
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
