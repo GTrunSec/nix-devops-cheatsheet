@@ -25,6 +25,7 @@
             inherit system;
             overlays = [
               self.python-dev-node-packages
+              self.overlay
             ];
             config = { };
           };
