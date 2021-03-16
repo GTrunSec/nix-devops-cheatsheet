@@ -4,14 +4,14 @@
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
     nixpkgs.url = "nixpkgs/3a7674c896847d18e598fa5da23d7426cb9be3d2";
-    gomod2nix = { url = "github:tweag/gomod2nix"; inputs.nixpkgs.follows = "nixpkgs"; };
+    gomod2nix-flake = { url = "github:tweag/gomod2nix"; inputs.nixpkgs.follows = "nixpkgs"; };
   };
 
   outputs =
     inputs@{ self
     , nixpkgs
     , flake-utils
-    , gomod2nix
+    , gomod2nix-flake
     }:
     { }
     //
@@ -22,7 +22,7 @@
           inherit system;
           overlays = [
             self.overlay
-            (import "${gomod2nix}/overlay.nix")
+            (import "${gomod2nix-flake}/overlay.nix")
           ];
           config = { };
         };
@@ -33,7 +33,7 @@
             gomod2nix
           ];
           shellHook = ''
-            ehco ${gomod2nix};
+            gomod2nix --verison
           '';
         };
         defaultPackage = pkgs.gomod2nix-example;

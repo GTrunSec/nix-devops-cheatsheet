@@ -15,8 +15,13 @@
         "type": "github"
       }
     },
-    "gomod2nix": {
-      "flake": false,
+    "gomod2nix-flake": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "utils": "utils"
+      },
       "locked": {
         "lastModified": 1612968658,
         "narHash": "sha256-l/3rr7FpLo+SHWf4rmzoh3TKJL0bYw9bCa369iZDE8c=",
@@ -49,8 +54,23 @@
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "gomod2nix": "gomod2nix",
+        "gomod2nix-flake": "gomod2nix-flake",
         "nixpkgs": "nixpkgs"
+      }
+    },
+    "utils": {
+      "locked": {
+        "lastModified": 1601282935,
+        "narHash": "sha256-WQAFV6sGGQxrRs3a+/Yj9xUYvhTpukQJIcMbIi7LCJ4=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "588973065fce51f4763287f0fda87a174d78bf48",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
       }
     }
   },
