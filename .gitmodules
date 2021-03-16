@@ -1,0 +1,3 @@
+[submodule "my-julia2nix-env"]
+	path = my-julia2nix-env
+	url = https://github.com/GTrunSec/my-julia2nix-env.git
