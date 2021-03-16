@@ -1,0 +1,63 @@
+{
+  "nodes": {
+    "easy-hls-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1615701211,
+        "narHash": "sha256-S5/eFiSsXhfWk4yNOAN3QE+UACzQ+ak7yuSGNlkvGvI=",
+        "owner": "jkachmar",
+        "repo": "easy-hls-nix",
+        "rev": "cf0cb016e1c57934592fd4c9d07d6b7a67d3f6ce",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jkachmar",
+        "repo": "easy-hls-nix",
+        "type": "github"
+      }
+    },
+    "flake-utils": {
+      "locked": {
+        "lastModified": 1614513358,
+        "narHash": "sha256-LakhOx3S1dRjnh0b5Dg3mbZyH0ToC9I8Y2wKSkBaTzU=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "5466c5bbece17adaab2d82fae80b46e807611bf3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1614389971,
+        "narHash": "sha256-AWmxiRwQ/ZI/mXIAW/yj7ziT2NoiD524n0a3LLtqiyg=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "462c6fe4b115804ea4d5bee7103c0f46ff9f9cfb",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "ref": "nixos-20.03",
+        "type": "indirect"
+      }
+    },
+    "root": {
+      "inputs": {
+        "easy-hls-nix": "easy-hls-nix",
+        "flake-utils": "flake-utils",
+        "nixpkgs": "nixpkgs"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
