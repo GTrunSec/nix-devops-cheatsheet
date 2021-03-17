@@ -23,16 +23,15 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1615936132,
+        "lastModified": 1615939669,
         "narHash": "sha256-Jq7n1GPFjgmbrpA7pPC9a2MbVmIeTkx/CTU4A14bUf0=",
-        "owner": "GTrunSec",
+        "owner": "tweag",
         "repo": "gomod2nix",
-        "rev": "0333f00e5face3710df5754afe53c7e651a5f60c",
+        "rev": "5dffe7b6ef0e5810d7fbd1715803114ae0e4a304",
         "type": "github"
       },
       "original": {
-        "owner": "GTrunSec",
-        "ref": "flake-overlay",
+        "owner": "tweag",
         "repo": "gomod2nix",
         "type": "github"
       }

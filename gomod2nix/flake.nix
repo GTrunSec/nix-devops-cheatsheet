@@ -4,7 +4,7 @@
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
     nixpkgs.url = "nixpkgs/3a7674c896847d18e598fa5da23d7426cb9be3d2";
-    gomod2nix-flake = { url = "github:GTrunSec/gomod2nix/flake-overlay"; inputs.nixpkgs.follows = "nixpkgs"; };
+    gomod2nix-flake = { url = "github:tweag/gomod2nix"; inputs.nixpkgs.follows = "nixpkgs"; };
   };
 
   outputs =
