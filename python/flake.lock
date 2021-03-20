@@ -99,12 +99,30 @@
         "type": "github"
       }
     },
+    "pypi-deps-db_2": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1615439355,
+        "narHash": "sha256-L122lZoLorZucd6U+utQu+aFQTrj3PE9vJpTebqiXqk=",
+        "owner": "DavHau",
+        "repo": "pypi-deps-db",
+        "rev": "2205d5a0fc9b691e7190d18ba164a3c594570a4b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "DavHau",
+        "repo": "pypi-deps-db",
+        "rev": "2205d5a0fc9b691e7190d18ba164a3c594570a4b",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "flake-compat": "flake-compat",
         "flake-utils": "flake-utils",
         "mach-nix": "mach-nix",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "pypi-deps-db": "pypi-deps-db_2"
       }
     }
   },
