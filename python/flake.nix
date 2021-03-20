@@ -1,5 +1,5 @@
 {
-  description = "python-develop";
+  description = "Python development environment";
 
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";

@@ -1,5 +1,5 @@
 {
-  description = "gomod2nix-develop";
+  description = "gomod2nix development environment";
 
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";

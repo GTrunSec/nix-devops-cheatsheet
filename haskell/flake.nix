@@ -1,5 +1,5 @@
 {
-  description = "haskell-develop";
+  description = "Haskell development environment";
 
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
