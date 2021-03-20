@@ -4,11 +4,12 @@
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
     nixpkgs.url = "nixpkgs/3a7674c896847d18e598fa5da23d7426cb9be3d2";
+    flake-compat = { url = "github:edolstra/flake-compat"; flake = false; };
     easy-hls-nix = { url = "github:jkachmar/easy-hls-nix"; inputs.nixpkgs.follows = "nixpkgs"; };
     nix-script = { url = "github:BrianHicks/nix-script"; inputs.nixpkgs.follows = "nixpkgs"; flake = false; };
   };
 
-  outputs = inputs@{ self, nixpkgs, flake-utils, easy-hls-nix, nix-script }:
+  outputs = inputs@{ self, nixpkgs, flake-utils, flake-compat, easy-hls-nix, nix-script }:
     { }
     //
     (flake-utils.lib.eachSystem [ "x86_64-linux" "x86_64-darwin" ]

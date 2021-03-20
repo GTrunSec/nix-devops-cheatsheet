@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "flake-compat": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1606424373,
+        "narHash": "sha256-oq8d4//CJOrVj+EcOaSXvMebvuTkmBJuT5tzlfewUnQ=",
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "rev": "99f1c2157fba4bfe6211a321fd0ee43199025dbf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "locked": {
         "lastModified": 1614513358,
@@ -45,6 +61,7 @@
     },
     "root": {
       "inputs": {
+        "flake-compat": "flake-compat",
         "flake-utils": "flake-utils",
         "nixpkgs": "nixpkgs",
         "rust-overlay": "rust-overlay"
@@ -58,11 +75,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1615862176,
-        "narHash": "sha256-bbRZK0RAiojpOmyRpBLuKrmRdiHNrUamP/9YY8tQIL4=",
+        "lastModified": 1616207907,
+        "narHash": "sha256-7NNM5yoryyVcMURny9DDvKkvv6o0q0FmWt7GX8p2yj0=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "5d6deca9118b00c67099e53f0a7ca81861e2d3f9",
+        "rev": "55f1211287ca843f431ebcdcd8f7844b50572b32",
         "type": "github"
       },
       "original": {
