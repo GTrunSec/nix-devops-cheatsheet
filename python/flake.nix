@@ -25,6 +25,7 @@
               pypiDataRev = pypi-deps-db.rev;
               pypiDataSha256 = pypi-deps-db.narHash;
               python = "python39";
+              inherit pkgs;
             };
 
           pkgs = import nixpkgs {
