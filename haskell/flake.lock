@@ -1,5 +1,20 @@
 {
   "nodes": {
+    "darwin-nixpkgs": {
+      "locked": {
+        "lastModified": 1610942247,
+        "narHash": "sha256-PKo1ATAlC6BmfYSRmX0TVmNoFbrec+A5OKcabGEu2yU=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "7d71001b796340b219d1bfa8552c81995017544a",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "rev": "7d71001b796340b219d1bfa8552c81995017544a",
+        "type": "indirect"
+      }
+    },
     "easy-hls-nix": {
       "inputs": {
         "nixpkgs": [
@@ -68,6 +83,7 @@
     },
     "root": {
       "inputs": {
+        "darwin-nixpkgs": "darwin-nixpkgs",
         "easy-hls-nix": "easy-hls-nix",
         "flake-compat": "flake-compat",
         "flake-utils": "flake-utils",
