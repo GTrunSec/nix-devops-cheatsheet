@@ -35,6 +35,10 @@
         in
         rec {
           #haskellPackages = pkgs.haskell.packages.ghc884;
+          packages = {
+            inherit (pkgs)
+              easy-hls;
+          };
 
           devShell = with pkgs;
             mkShell {
