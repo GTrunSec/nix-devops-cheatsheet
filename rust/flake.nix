@@ -54,11 +54,10 @@
                 rust-bin.stable.latest.rustc
                 rust-bin.stable.latest.cargo
                 rust-bin.stable.latest.rust-analysis
-                rust-bin.stable.latest.rust-src
                 rust-bin.stable.latest.rust-docs
                 rust-bin.stable.latest.rust-std
               ];
-              RUST_SRC_PATH = "${rust-bin.stable.latest.rust}/lib/rustlib/src/rust/src";
+              RUST_SRC_PATH = "${rust-bin.stable.latest.rust-src}/lib/rustlib/src/rust/library";
               shellHook = ''
             '';
             };
