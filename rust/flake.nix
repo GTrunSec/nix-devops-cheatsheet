@@ -34,7 +34,7 @@
         in
         rec {
           packages = {
-            inherit (pkgs.rust-bin.stable.latest)
+            inherit (pkgs.rust-bin.nightly.latest)
               rust
               rustc
               cargo
@@ -50,14 +50,14 @@
               buildInputs = [
                 rustracer
               ] ++ [
-                rust-bin.stable.latest.rust
-                rust-bin.stable.latest.rustc
-                rust-bin.stable.latest.cargo
-                rust-bin.stable.latest.rust-analysis
-                rust-bin.stable.latest.rust-docs
-                rust-bin.stable.latest.rust-std
+                rust-bin.nightly.latest.rust
+                # rust-bin.stable.latest.rustc
+                # rust-bin.stable.latest.cargo
+                # rust-bin.stable.latest.rust-analysis
+                # rust-bin.stable.latest.rust-docs
+                # rust-bin.stable.latest.rust-std
               ];
-              RUST_SRC_PATH = "${rust-bin.stable.latest.rust-src}/lib/rustlib/src/rust/library";
+              RUST_SRC_PATH = "${rust-bin.nightly.rust-src}/lib/rustlib/src/rust/library";
               shellHook = ''
             '';
             };

@@ -46,6 +46,7 @@
                 easy-hls
                 (haskellPackages.ghcWithPackages
                   (p: with p;  [
+                    brittany #format
                     relude
                   ]))
               ];
