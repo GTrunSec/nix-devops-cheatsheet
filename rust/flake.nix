@@ -35,7 +35,6 @@
         rec {
           packages = {
             inherit (pkgs.rust-bin.nightly.latest)
-              rust
               rustc
               cargo
               rust-analysis
@@ -49,14 +48,13 @@
             mkShell {
               buildInputs = [
                 rustracer
-              ] ++ [
-                rust-bin.nightly.latest.rust
-                # rust-bin.stable.latest.rustc
-                # rust-bin.stable.latest.cargo
-                # rust-bin.stable.latest.rust-analysis
-                # rust-bin.stable.latest.rust-docs
-                # rust-bin.stable.latest.rust-std
-              ];
+              ] ++ (with rust-bin.nightly.latest; [
+                rustc
+                cargo
+                rust-analysis
+                rust-docs
+                rust-std
+              ]);
               RUST_SRC_PATH = "${rust-bin.nightly.rust-src}/lib/rustlib/src/rust/library";
               shellHook = ''
             '';
