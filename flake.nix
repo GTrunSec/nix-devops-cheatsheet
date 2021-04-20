@@ -11,7 +11,7 @@
       url = "path:./rust";
     };
     flake-utils.url = "github:numtide/flake-utils";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "nixpkgs/7d71001b796340b219d1bfa8552c81995017544a";
   };
 
   outputs = { self, nixpkgs, flake-utils, haskell-flake-env, python-flake-env, rust-flake-env }:
