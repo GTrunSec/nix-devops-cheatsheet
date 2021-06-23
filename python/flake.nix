@@ -20,14 +20,6 @@
     (flake-utils.lib.eachSystem [ "x86_64-linux" "x86_64-darwin" ]
       (system:
         let
-          machLib = import mach-nix
-            {
-              pypiDataRev = pypi-deps-db.rev;
-              pypiDataSha256 = pypi-deps-db.narHash;
-              python = "python39";
-              inherit pkgs;
-            };
-
           pkgs = import nixpkgs {
             inherit system;
             overlays = [
@@ -38,8 +30,7 @@
           };
         in
         rec {
-
-          python-packages-custom = machLib.mkPython rec {
+          python-packages-custom = pkgs.machlib.mkPython rec {
             requirements = ''
               isort
             '';
@@ -68,6 +59,8 @@
       )
     ) //
     {
-      overlay = final: prev: { };
+      overlay = final: prev: {
+        machlib = mach-nix.lib.${final.system};
+      };
     };
 }

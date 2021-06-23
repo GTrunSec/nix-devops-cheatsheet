@@ -3,7 +3,7 @@
 
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
-    nixpkgs.url = "nixpkgs/7d71001b796340b219d1bfa8552c81995017544a";
+    nixpkgs.url = "nixpkgs/release-21.05";
     master.url = "nixpkgs";
     flake-compat = { url = "github:edolstra/flake-compat"; flake = false; };
     guix-overlay = { url = "github:Emiller88/guix"; inputs.nixpkgs.follows = "nixpkgs"; };

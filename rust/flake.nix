@@ -3,7 +3,7 @@
 
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
-    nixpkgs.url = "nixpkgs/7d71001b796340b219d1bfa8552c81995017544a";
+    nixpkgs.url = "nixpkgs/release-21.05";
     flake-compat = { url = "github:edolstra/flake-compat"; flake = false; };
     rust-overlay = { url = "github:oxalica/rust-overlay"; inputs.nixpkgs.follows = "nixpkgs"; };
     devshell-flake.url = "github:numtide/devshell";
@@ -30,7 +30,7 @@
           inherit system;
           overlays = [
             self.overlay
-            (import rust-overlay)
+            rust-overlay.overlay
             devshell-flake.overlay
             #unstable
           ];
