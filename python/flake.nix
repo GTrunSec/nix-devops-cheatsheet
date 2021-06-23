@@ -60,7 +60,13 @@
     ) //
     {
       overlay = final: prev: {
-        machlib = mach-nix.lib.${final.system};
+        machlib = import mach-nix
+          {
+            pypiDataRev = pypi-deps-db.rev;
+            pypiDataSha256 = pypi-deps-db.narHash;
+            python = "python39";
+            pkgs = prev;
+          };
       };
     };
 }
