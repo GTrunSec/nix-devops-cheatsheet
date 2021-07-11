@@ -9,10 +9,10 @@ in
   pyright = nodeEnv.buildNodePackage {
     name = "pyright";
     packageName = "pyright";
-    version = "1.1.123";
+    version = "1.1.155";
     src = fetchurl {
-      url = "https://registry.npmjs.org/pyright/-/pyright-1.1.123.tgz";
-      sha512 = "EYjELbm4G4icuIki6PfpzYrxNeGH78vNbXNmsbb/9XnnVQISdFcbc9oOBc2mU77enUwZctwZ6Nj2mZUMD9VibQ==";
+      url = "https://registry.npmjs.org/pyright/-/pyright-1.1.155.tgz";
+      sha512 = "y7VqgiOMiLqzFzQ6LCVUtyb8VCsVbwzOHw16A5YxidGmARRYvFn1kIf1uCDqj3ytxrOcVHyptq90/TSffU0hZg==";
     };
     buildInputs = globalBuildInputs;
     meta = {
