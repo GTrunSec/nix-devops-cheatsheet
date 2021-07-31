@@ -3,7 +3,7 @@
 
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
-    nixpkgs.url = "nixpkgs/3a7674c896847d18e598fa5da23d7426cb9be3d2";
+    nixpkgs.url = "nixpkgs/release-21.05";
     flake-compat = { url = "github:edolstra/flake-compat"; flake = false; };
     pypi-deps-db = {
       url = "github:DavHau/pypi-deps-db/2205d5a0fc9b691e7190d18ba164a3c594570a4b";
@@ -13,9 +13,7 @@
   };
 
   outputs = inputs@{ self, nixpkgs, flake-utils, flake-compat, mach-nix, pypi-deps-db }:
-    {
-      node-packages = import ./node-packages;
-    }
+    { }
     //
     (flake-utils.lib.eachSystem [ "x86_64-linux" "x86_64-darwin" ]
       (system:
@@ -23,7 +21,7 @@
           pkgs = import nixpkgs {
             inherit system;
             overlays = [
-              self.node-packages
+              (import ./node-packages)
               self.overlay
             ];
             config = { };
