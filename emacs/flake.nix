@@ -23,27 +23,44 @@
           overlays = [
             emacs-overlay.overlay
             (final: prev: {
-              emacsPackagesFor = emacs: (
-                (prev.emacsPackagesFor emacs).overrideScope'
-                  (
-                    efinal: eprev:
-                      let
-                        melpaPackages = eprev.melpaPackages // {
-                          my-nix-mode = nix-mode.defaultPackage."${final.system}";
-                        };
-                      in
-                      eprev.override
-                        {
-                          inherit melpaPackages;
-                        }
-                  ));
+              myEmacsPackageOverrides = self: super:
+                let
+                  melpaPackages = super.melpaPackages // {
+                    my-nix-mode = super.nix-mode.overrideAttrs (old: {
+                      src = "${nix-mode}";
+                    });
+                  };
+                  manualPackages = super.manualPackages // {
+                    # my-nix-mode = super.trivialBuild {
+                    #   pname = "nix-mode-flake";
+                    #   src = "${nix-mode}";
+                    #   packageRequires = with super;[
+                    #     f
+                    #     mmm-mode
+                    #     org-plus-contrib
+                    #     company
+                    #   ];
+                    # };
+                  };
+                in
+                super.override {
+                  inherit manualPackages melpaPackages;
+                };
+
+              myEmacsPackages = epkgs: with epkgs; [ melpaPackages.my-nix-mode ];
+              myEmacs = ((final.emacsPackagesFor final.emacs).overrideScope' final.myEmacsPackageOverrides).emacsWithPackages
+                final.myEmacsPackages;
             })
           ];
         };
       let
         emacs-packages = import ./packages.nix { inherit pkgs; };
-        emacs-final = (pkgs.emacsPackagesFor pkgs.emacs).emacsWithPackages emacs-packages;
-        aux-packages = import ./auxilary.nix { inherit pkgs; };
+        #emacs-final = (pkgs.emacsPackagesFor pkgs.emacs).emacsWithPackages emacs-packages;
+        emacs-final = pkgs.myEmacs;
+
+        aux-packages = import ./auxilary.nix {
+          inherit pkgs;
+        };
         all-packages = [ emacs-final ] ++ aux-packages;
       in
       {
