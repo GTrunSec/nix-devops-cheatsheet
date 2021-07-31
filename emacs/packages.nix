@@ -2,5 +2,7 @@
 epkgs:
 (with epkgs.melpaPackages;
 [
-  my-nix-mode
+  nix-mode
+]) ++ (with epkgs.manualPackages;[
+  clip2org
 ])
