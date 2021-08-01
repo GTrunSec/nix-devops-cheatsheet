@@ -1,5 +1,8 @@
 {
   description = "Emacs Flakes";
+  nixConfig.extra-experimental-features = "nix-command flakes ca-references";
+  nixConfig.extra-substituters = "https://emacsng.cachix.org";
+  nixConfig.extra-trusted-public-keys = "emacsng.cachix.org-1:i7wOr4YpdRpWWtShI8bT6V7lOTnPeI7Ho6HaZegFWMI=";
 
   inputs = {
     nixpkgs = { url = "nixpkgs/release-21.05"; };
@@ -9,6 +12,7 @@
       repo = "emacs-overlay";
     };
     nix-mode = { url = "github:NixOS/nix-mode"; };
+    emacs-ng = { url = "github:emacs-ng/emacs-ng"; };
   };
 
   outputs =
@@ -16,6 +20,7 @@
     , nixpkgs
     , emacs-overlay
     , nix-mode
+    , emacs-ng
     }:
       with import nixpkgs
         {
@@ -23,6 +28,8 @@
           overlays = [
             emacs-overlay.overlay
             (final: prev: {
+              emacsNg = emacs-ng.defaultPackage."${final.system}";
+
               emacsPackagesFor = emacs: (
                 (prev.emacsPackagesFor emacs).overrideScope' (
                   eself: esuper:
@@ -55,8 +62,12 @@
         };
       let
         emacs-packages = import ./packages.nix { inherit pkgs; };
-        emacs-final = (pkgs.emacsPackagesFor pkgs.emacs).emacsWithPackages emacs-packages;
-        aux-packages = import ./auxilary.nix { inherit pkgs; };
+        emacs-final = (pkgs.emacsPackagesFor (pkgs.emacsNg.overrideAttrs (old: {
+          #withWebrender = true;
+        }))).emacsWithPackages emacs-packages;
+        aux-packages = import ./auxilary.nix {
+          inherit pkgs;
+        };
         all-packages = [ emacs-final ] ++ aux-packages;
       in
       {
