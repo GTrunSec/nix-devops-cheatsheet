@@ -1,3 +1,6 @@
 { pkgs }:
 with pkgs;
-[ python-language-server ]
+[
+  #python-language-server
+  pyright
+]
