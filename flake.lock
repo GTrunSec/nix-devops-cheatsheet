@@ -33,6 +33,7 @@
     "easy-hls-nix": {
       "inputs": {
         "nixpkgs": [
+          "haskell-flake-env",
           "nixpkgs"
         ]
       },
@@ -100,11 +101,11 @@
     },
     "flake-utils": {
       "locked": {
-        "lastModified": 1623875721,
-        "narHash": "sha256-A8BU7bjS5GirpAUv4QA+QnJ4CceLHkcXdRp4xITDB0s=",
+        "lastModified": 1631561581,
+        "narHash": "sha256-3VQMV5zvxaVLvqqUrNz3iJelLw30mIVSfZmAaauM3dA=",
         "owner": "numtide",
         "repo": "flake-utils",
-        "rev": "f7e004a55b120c02ecb6219596820fcd32ca8772",
+        "rev": "7e5bf3925f6fbdfaf50a2a7ca0be2879c4261d19",
         "type": "github"
       },
       "original": {
@@ -210,6 +211,7 @@
       "inputs": {
         "flake-utils": "flake-utils_4",
         "nixpkgs": [
+          "python-flake-env",
           "nixpkgs"
         ],
         "pypi-deps-db": "pypi-deps-db"
@@ -245,11 +247,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1624404269,
-        "narHash": "sha256-EfyRXU37LKvVhRX6FtEzg+WAg2CROKwgeCnQnghtMC4=",
+        "lastModified": 1633072965,
+        "narHash": "sha256-RUB9u279UinIf298xJRAxA30lNJ/KBvN7C+XjGZGXXc=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "015d169c3f2771c39e7b16283d7ce868abcce9a6",
+        "rev": "40868780fc2d689f79813c8589827b0b5e0234d6",
         "type": "github"
       },
       "original": {
@@ -260,16 +262,16 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1615709438,
-        "narHash": "sha256-hDLC1wVzcD+9dt1U9QpbP0v9bOYD9NGczsobHIEhDYw=",
+        "lastModified": 1633072965,
+        "narHash": "sha256-RUB9u279UinIf298xJRAxA30lNJ/KBvN7C+XjGZGXXc=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "3a7674c896847d18e598fa5da23d7426cb9be3d2",
+        "rev": "40868780fc2d689f79813c8589827b0b5e0234d6",
         "type": "github"
       },
       "original": {
         "id": "nixpkgs",
-        "rev": "3a7674c896847d18e598fa5da23d7426cb9be3d2",
+        "ref": "release-21.05",
         "type": "indirect"
       }
     },
@@ -330,7 +332,7 @@
         "pypi-deps-db": "pypi-deps-db_2"
       },
       "locked": {
-        "narHash": "sha256-4/TRMDNfcBUyIJ/NWi3jOuVBgzbga9oOWQ/8z9B7r0U=",
+        "narHash": "sha256-WzA6w0SW3b0XuJ0FDsdGeQFYb15deS0UITCh7aIz8T0=",
         "path": "./python",
         "type": "path"
       },
@@ -370,6 +372,7 @@
       "inputs": {
         "flake-utils": "flake-utils_6",
         "nixpkgs": [
+          "rust-flake-env",
           "nixpkgs"
         ]
       },
