@@ -50,13 +50,7 @@
           devShell = with pkgs;
             mkShell {
               buildInputs = [
-                nix-script
-                nix-script-haskell
-                nix-script-bash
-                (haskellPackages.ghcWithPackages
-                  (p: with p;  [
-                    relude
-                  ]))
+                nix-script-shell
               ];
             };
         }
