@@ -1,0 +1,35 @@
+name: "CI"
+on:
+  push:
+    branches:
+      - main
+      - trying
+      - staging
+
+  schedule:
+    - cron: "0 0 * * SUN" # every sunday
+jobs:
+  nix-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2.3.5
+        with:
+          fetch-depth: 0
+      - uses: cachix/install-nix-action@v14
+        with:
+          install_url: https://github.com/numtide/nix-unstable-installer/releases/download/nix-2.5pre20211008_6bd74a6/install
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+            system-features = nixos-test benchmark big-parallel kvm recursive-nix
+
+      - name: Check default devos commands
+        run: nix develop ./devshell -c bud --help
+
+      - name: Check second custom commands
+        run: |
+          nix develop ./devshell -c second --help
+          nix develop ./devshell -c second test
+      - name: Check third custom commands
+        run: |
+          nix develop ./devshell -c third --help
+          nix develop ./devshell -c third py
