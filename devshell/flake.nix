@@ -43,7 +43,7 @@
               category = "devos";
               package = reboudBud {
                 inherit pkgs;
-                name = "devos";
+                name = "bud";
               };
             }
             {
