@@ -23,13 +23,14 @@ jobs:
             system-features = nixos-test benchmark big-parallel kvm recursive-nix
 
       - name: Check default devos commands
-        run: nix develop ./devshell -c bud --help
+        run: |
+          nix -Lv develop ./devshell -c -- bud --help
 
       - name: Check second custom commands
         run: |
-          nix develop ./devshell -c second --help
-          nix develop ./devshell -c second test
+          nix -Lv develop ./devshell -c -- second --help
+          nix -Lv develop ./devshell -c -- second test
       - name: Check third custom commands
         run: |
-          nix develop ./devshell -c third --help
-          nix develop ./devshell -c third py
+          nix -Lv develop ./devshell -c -- third --help
+          nix -Lv develop ./devshell -c -- third py
