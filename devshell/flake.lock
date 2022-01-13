@@ -31,18 +31,13 @@
         ]
       },
       "locked": {
-        "lastModified": 1642054683,
-        "narHash": "sha256-hApgNIGQr+TeTYOj5Wl/k5o251Rr+1TNaLeuiWZA6P0=",
-        "owner": "gtrunsec",
-        "repo": "bud",
-        "rev": "c0a5c85380deec021f779cc27a19d29dbd08c8c1",
-        "type": "github"
+        "narHash": "sha256-Y6ftwY+3Na90REbE/8w/TXQrmM/RMavc8AwYzpM84wc=",
+        "path": "/home/gtrun/ghq/github.com/GTrunSec/bud",
+        "type": "path"
       },
       "original": {
-        "owner": "gtrunsec",
-        "ref": "extend",
-        "repo": "bud",
-        "type": "github"
+        "path": "/home/gtrun/ghq/github.com/GTrunSec/bud",
+        "type": "path"
       }
     },
     "devshell": {
@@ -139,11 +134,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1642052904,
-        "narHash": "sha256-q+faEQXptqjt1RrOJbVe+qb4NY8NlkjhZMlbyZ+raao=",
+        "lastModified": 1642057313,
+        "narHash": "sha256-JM2xPxF3JeYMSAiFaOIkRWPbye/c+oSrmUBZk7OvveI=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "2641efd7d026fc3a44c8cc83c6be959f7e3e99b1",
+        "rev": "df3022f35ac566b9b7badb1f9f28f365f03a02a1",
         "type": "github"
       },
       "original": {

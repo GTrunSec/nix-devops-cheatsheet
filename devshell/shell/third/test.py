@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
 import isort
 
-print("Python Script with Bud")
+sorted_code = isort.code("import b\nimport a\n")
+print(sorted_code)
