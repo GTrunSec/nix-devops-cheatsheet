@@ -3,7 +3,7 @@
 
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
-    nixpkgs.url = "nixpkgs/release-21.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/release-21.11";
     flake-compat = { url = "github:edolstra/flake-compat"; flake = false; };
     pypi-deps-db = {
       url = "github:DavHau/pypi-deps-db/2205d5a0fc9b691e7190d18ba164a3c594570a4b";

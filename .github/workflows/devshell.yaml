@@ -9,7 +9,7 @@ on:
   schedule:
     - cron: "0 0 * * SUN" # every sunday
 jobs:
-  nix-build:
+  devshell:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2.4.0

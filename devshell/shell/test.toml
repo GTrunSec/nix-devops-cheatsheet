@@ -1,0 +1,5 @@
+[[commands]]
+name = "asdasdtest"
+category = "test"
+command = "echo test commands"
+help = "Nothing"

@@ -5,9 +5,9 @@
       synopsis = "get (core|community) [DEST]";
       help = "Copy the desired template to DEST";
       script = ./get.bash;
-      extraScript = ''
-        echo ${pkgs.hello}
-      '';
+      # extraScript = ''
+      #   echo ${pkgs.hello}
+      # '';
     };
   };
 }

@@ -4,7 +4,7 @@
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
     darwin-nixpkgs.url = "nixpkgs/7d71001b796340b219d1bfa8552c81995017544a";
-    nixpkgs.url = "nixpkgs/release-21.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/release-21.11";
     flake-compat = { url = "github:edolstra/flake-compat"; flake = false; };
     easy-hls-nix = { url = "github:jkachmar/easy-hls-nix"; inputs.nixpkgs.follows = "nixpkgs"; };
   };

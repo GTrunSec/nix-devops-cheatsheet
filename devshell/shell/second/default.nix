@@ -5,11 +5,6 @@
       synopsis = "test";
       help = "exec your script of second ctl";
       script = ./test.bash;
-      extraScript = ''
-        echo "test extraScript part"
-        echo ${pkgs.hello}
-        echo "---------------"
-      '';
     };
   };
 }
