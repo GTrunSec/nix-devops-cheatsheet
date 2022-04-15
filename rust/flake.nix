@@ -4,7 +4,7 @@
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
     nixpkgs.url = "github:NixOS/nixpkgs/release-21.11";
-    flake-compat = { url = "github:edolstra/flake-compat"; flake = false; };
+    flake-compat = {url = "github:edolstra/flake-compat"; flake = false; };
     rust-overlay = { url = "github:oxalica/rust-overlay"; inputs.nixpkgs.follows = "nixpkgs"; };
     devshell-flake.url = "github:numtide/devshell";
   };
@@ -15,7 +15,7 @@
     , flake-utils
     , flake-compat
     , rust-overlay
-    , devshell-flake
+    , devshell
     }:
     { }
     //
@@ -31,12 +31,10 @@
           overlays = [
             self.overlay
             rust-overlay.overlay
-            devshell-flake.overlay
+            devshell.overlay
             #unstable
           ];
-
           config = { };
-
         };
       in
       rec {
@@ -52,8 +50,7 @@
             ./nix/rust.nix
             (devshell.importTOML ./nix/commands.toml)
           ];
-          packages = [
-          ];
+          packages = [  ];
         };
       })
     ) //
