@@ -3,62 +3,41 @@
 
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
-    nixpkgs.url = "github:NixOS/nixpkgs/release-21.11";
-    flake-compat = {url = "github:edolstra/flake-compat"; flake = false; };
-    rust-overlay = { url = "github:oxalica/rust-overlay"; inputs.nixpkgs.follows = "nixpkgs"; };
-    devshell-flake.url = "github:numtide/devshell";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+
+    flake-compat.url = "github:edolstra/flake-compat";
+    flake-compat.flake = false;
+
+    rust-overlay.url = "github:oxalica/rust-overlay";
+    rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
+
+    naersk.url = "github:nmattia/naersk";
+    naersk.inputs.nixpkgs.follows = "nixpkgs";
+
+    devshell.url = "github:numtide/devshell";
+    devshell.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs =
-    inputs@{ self
-    , nixpkgs
-    , flake-utils
-    , flake-compat
-    , rust-overlay
-    , devshell
-    }:
-    { }
-    //
-    (flake-utils.lib.eachSystem [ "x86_64-linux" "x86_64-darwin" ]
-      (system:
-      let
-        # unstable = final: prev: {
-        #   inherit ((import inputs.master) { inherit system; })
-        #     rustracer;
-        # };
-        pkgs = import nixpkgs {
-          inherit system;
-          overlays = [
-            self.overlay
-            rust-overlay.overlay
-            devshell.overlay
-            #unstable
-          ];
-          config = { };
-        };
-      in
-      rec {
-        packages = {
-          inherit (pkgs.rust-bin.nightly.latest)
-            default
-            rust-analyzer-preview;
-          inherit (pkgs)
-            rustracer;
-        };
-        devShell = with pkgs; devshell.mkShell {
-          imports = [
-            ./nix/rust.nix
-            (devshell.importTOML ./nix/commands.toml)
-          ];
-          packages = [  ];
-        };
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    flake-utils,
+    ...
+  }:
+    (
+      flake-utils.lib.eachDefaultSystem (system: let
+        pkgs = nixpkgs.legacyPackages.${system}.appendOverlays [
+          self.overlays.default
+          inputs.rust-overlay.overlay
+          inputs.devshell.overlay
+          inputs.naersk.overlay
+        ];
+      in rec {
+        packages = {};
+        devShells = import ./devshell {inherit pkgs;};
       })
-    ) //
-    {
-      overlay = final: prev: {
-        rust-final = final.rust-bin.stable.latest.default.override {
-          extensions = [ "rust-src" ];
-        };
-      };
+    )
+    // {
+      overlays = import ./nix/overlays.nix {inherit inputs;};
     };
 }
