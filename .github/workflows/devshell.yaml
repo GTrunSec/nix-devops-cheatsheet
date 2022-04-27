@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v3.0.2
         with:
           fetch-depth: 0
-      - uses: cachix/install-nix-action@v16
+      - uses: cachix/install-nix-action@v17
         with:
           install_url: https://github.com/numtide/nix-unstable-installer/releases/download/nix-2.5pre20211008_6bd74a6/install
           extra_nix_config: |
