@@ -10,7 +10,6 @@
     std.growOn {
       inherit inputs;
       cellsFrom = ./cells;
-      systems = [ "" ];
       organelles = [
         (std.functions "library")
         (std.devshells "devshells")
