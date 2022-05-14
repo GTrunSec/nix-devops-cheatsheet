@@ -1,3 +1,4 @@
+
 {
   description = "Rust development environment";
 
@@ -19,6 +20,9 @@
 
     nix-filter.url = "github:/numtide/nix-filter";
     nix-filter.inputs.nixpkgs.follows = "nixpkgs";
+
+    code-snippets.url = "githhub:GTrunSec/code-snippets";
+    code-snippets.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs @ {
