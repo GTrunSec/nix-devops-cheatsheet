@@ -12,10 +12,7 @@
     nix-script.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs @ {
-    self,
-    ...
-  }:
+  outputs = inputs @ {self, ...}:
     {}
     // (
       inputs.flake-utils.lib.eachSystem ["x86_64-linux" "x86_64-darwin"]
@@ -25,9 +22,7 @@
             inputs.nix-script.overlay
           ];
         in {
-          apps = {
-          };
-          #haskellPackages = pkgs.haskell.packages.ghc884;
+          apps = {};
           devShell = with pkgs;
             mkShell {
               buildInputs = [];

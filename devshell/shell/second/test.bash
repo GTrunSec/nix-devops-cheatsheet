@@ -1,1 +1,0 @@
-echo "second bash script"

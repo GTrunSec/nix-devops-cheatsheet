@@ -1,18 +1,23 @@
 {
-  description = "Nix: Coding development environment";
   inputs = {
-    flake-utils.url = "github:numtide/flake-utils";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-  };
+    std.url = "github:divnix/std";
+    std.inputs.nixpkgs.follows = "nixpkgs";
 
-  outputs = {self, ...} @ inputs:
-    inputs.flake-utils.lib.eachDefaultSystem
-    (system: let
-      pkgs = inputs.nixpkgs.legacyPackages.${system};
-    in {
-      devShells.default = pkgs.mkShell {};
-    })
-    // {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    data-merge.url = "github:divnix/data-merge";
+  };
+  outputs = {std, ...} @ inputs:
+    std.growOn {
+      inherit inputs;
+      cellsFrom = ./cells;
+      organelles = [
+        (std.functions "library")
+        (std.devshells "devshells")
+        (std.functions "devshellProfiles")
+      ];
+    } {
+      devShells = inputs.std.harvest inputs.self ["main" "devshells"];
+    } {
       templates = {
         rust = {
           description = "Rust Environment";

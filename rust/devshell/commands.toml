@@ -4,7 +4,6 @@ category = "cargo"
 command = "cargo build"
 help = "cargo build "
 
-
 [[env]]
 name = "RUST_BACKTRACE"
 value = "1"

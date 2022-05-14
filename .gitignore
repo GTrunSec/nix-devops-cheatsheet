@@ -3,6 +3,6 @@
 *.log
 tmp/
 
-
+.std
 .direnv
 .nix-script-cache
