@@ -1,8 +1,7 @@
-{ pkgs }:
-epkgs:
-(with epkgs.melpaPackages;
-[
+{pkgs}: epkgs:
+(with epkgs.melpaPackages; [
   nix-mode
-]) ++ (with epkgs.manualPackages;[
+])
+++ (with epkgs.manualPackages; [
   clip2org
 ])

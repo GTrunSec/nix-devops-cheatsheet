@@ -4,40 +4,48 @@
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
     nixpkgs.url = "github:NixOS/nixpkgs/release-21.11";
-    flake-compat = { url = "github:edolstra/flake-compat"; flake = false; };
-    nix_script = { url = "github:BrianHicks/nix-script"; };
+    flake-compat = {
+      url = "github:edolstra/flake-compat";
+      flake = false;
+    };
+    nix_script = {url = "github:BrianHicks/nix-script";};
   };
 
-  outputs = inputs@{ self, nixpkgs, flake-utils, flake-compat, nix_script }:
-    { }
-    //
-    (flake-utils.lib.eachSystem [ "x86_64-linux" "x86_64-darwin" ]
-      (system:
-        let
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    flake-utils,
+    flake-compat,
+    nix_script,
+  }:
+    {}
+    // (
+      flake-utils.lib.eachSystem ["x86_64-linux" "x86_64-darwin"]
+      (
+        system: let
           pkgs = import nixpkgs {
             inherit system;
             overlays = [
               self.overlay
               nix_script.overlay
             ];
-            config = { };
+            config = {};
           };
           nix-script-shell = with pkgs; [
             nix-script
             nix-script-haskell
             nix-script-bash
-            (haskellPackages.ghcWithPackages (p: with p; [ relude ]))
+            (haskellPackages.ghcWithPackages (p: with p; [relude]))
           ];
-        in
-        {
+        in {
           apps = {
             tests = flake-utils.lib.mkApp {
-              drv = with import nixpkgs { inherit system; };
+              drv = with import nixpkgs {inherit system;};
                 pkgs.writeShellScriptBin "nix-script-checks" ''
                   export PATH=${
-                     pkgs.lib.strings.makeBinPath
-                       ([ findutils coreutils ] ++ nix-script-shell)
-                   }
+                    pkgs.lib.strings.makeBinPath
+                    ([findutils coreutils] ++ nix-script-shell)
+                  }
                    set -xeuo pipefail
                    (
                    scripts/exp-with-dependencies.hs
@@ -55,8 +63,8 @@
             };
         }
       )
-    ) //
-    {
-      overlay = final: prev: { };
+    )
+    // {
+      overlay = final: prev: {};
     };
 }

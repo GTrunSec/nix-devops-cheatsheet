@@ -16,6 +16,9 @@
 
     devshell.url = "github:numtide/devshell";
     devshell.inputs.nixpkgs.follows = "nixpkgs";
+
+    nix-filter.url = "github:/numtide/nix-filter";
+    nix-filter.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs @ {

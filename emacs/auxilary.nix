@@ -1,6 +1,5 @@
-{ pkgs }:
-with pkgs;
-[
+{pkgs}:
+with pkgs; [
   #python-language-server
   pyright
 ]
