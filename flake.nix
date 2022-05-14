@@ -9,7 +9,9 @@
     inputs.flake-utils.lib.eachDefaultSystem
     (system: let
       pkgs = inputs.nixpkgs.legacyPackages.${system};
-    in {})
+    in {
+      devShells.default = pkgs.mkShell {};
+    })
     // {
       templates = {
         rust = {

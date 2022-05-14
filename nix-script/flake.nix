@@ -3,63 +3,34 @@
 
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
-    nixpkgs.url = "github:NixOS/nixpkgs/release-21.11";
-    flake-compat = {
-      url = "github:edolstra/flake-compat";
-      flake = false;
-    };
-    nix_script = {url = "github:BrianHicks/nix-script";};
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+
+    flake-compat.url = "github:edolstra/flake-compat";
+    flake-compat.flake = false;
+
+    nix-script.url = "github:BrianHicks/nix-script";
+    nix-script.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs @ {
     self,
-    nixpkgs,
-    flake-utils,
-    flake-compat,
-    nix_script,
+    ...
   }:
     {}
     // (
-      flake-utils.lib.eachSystem ["x86_64-linux" "x86_64-darwin"]
+      inputs.flake-utils.lib.eachSystem ["x86_64-linux" "x86_64-darwin"]
       (
         system: let
-          pkgs = import nixpkgs {
-            inherit system;
-            overlays = [
-              self.overlay
-              nix_script.overlay
-            ];
-            config = {};
-          };
-          nix-script-shell = with pkgs; [
-            nix-script
-            nix-script-haskell
-            nix-script-bash
-            (haskellPackages.ghcWithPackages (p: with p; [relude]))
+          pkgs = inputs.nixpkgs.legacyPackages.${system}.appendOverlays [
+            inputs.nix-script.overlay
           ];
         in {
           apps = {
-            tests = flake-utils.lib.mkApp {
-              drv = with import nixpkgs {inherit system;};
-                pkgs.writeShellScriptBin "nix-script-checks" ''
-                  export PATH=${
-                    pkgs.lib.strings.makeBinPath
-                    ([findutils coreutils] ++ nix-script-shell)
-                  }
-                   set -xeuo pipefail
-                   (
-                   scripts/exp-with-dependencies.hs
-                   scripts/exp-hello.hs
-                   )
-                '';
-            };
           };
           #haskellPackages = pkgs.haskell.packages.ghc884;
           devShell = with pkgs;
             mkShell {
-              buildInputs = [
-                nix-script-shell
-              ];
+              buildInputs = [];
             };
         }
       )
