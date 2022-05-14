@@ -10,6 +10,13 @@
     std.growOn {
       inherit inputs;
       cellsFrom = ./cells;
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+        "x86_64-darwin"
+        "aarch64-darwin"
+        "i686-linux"
+      ];
       organelles = [
         (std.functions "library")
         (std.devshells "devshells")
@@ -29,8 +36,7 @@
         };
         go = {
           description = "Go Environment";
-          path = ./go
-          ;
+          path = ./go;
         };
       };
     };
