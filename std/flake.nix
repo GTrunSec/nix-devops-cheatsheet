@@ -1,16 +1,22 @@
 {
   inputs = {
     std.url = "github:divnix/std";
+    std.inputs.nixpkgs.follows = "nixpkgs";
+
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    data-merge.url = "github:divnix/data-merge";
+
+    cells-lab.url = "github:GTrunSec/DevSecOps-Cells-Lab";
   };
   outputs = {std, ...} @ inputs:
-    std.grow {
+    std.growOn {
       inherit inputs;
       cellsFrom = ./cells;
       organelles = [
+        (std.devshells "devshells")
         (std.functions "library")
         (std.functions "lib")
       ];
+    } {
+      devShells = inputs.std.harvest inputs.self ["main" "devshells"];
     };
 }
