@@ -3,8 +3,8 @@
 
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
-    darwin-nixpkgs.url = "nixpkgs/7d71001b796340b219d1bfa8552c81995017544a";
-    nixpkgs.url = "github:NixOS/nixpkgs/release-21.11";
+    darwin-nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-22.05-darwin";
+    nixpkgs.url = "github:NixOS/nixpkgs/release-22.05";
     flake-compat = {
       url = "github:edolstra/flake-compat";
       flake = false;
