@@ -53,6 +53,7 @@
             inherit
               (pkgs.python3.pkgs)
               py7zr
+              flake8-isort
               ;
           };
           hydraJobs = {
@@ -65,6 +66,15 @@
       overlays.poetry2nix = inputs.poetry2nix.overlay;
       overlays.default = final: prev: {
         my-poetry-packages = prev.callPackage ./poetry {};
+        nvfetcher-sources = import ./nixpkgs/_sources/generated.nix {
+          inherit
+            (prev)
+            fetchgit
+            fetchurl
+            fetchFromGitHub
+            dockerTools
+            ;
+        };
         python3 =
           prev.python3.override
           (

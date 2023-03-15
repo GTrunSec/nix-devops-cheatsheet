@@ -1,11 +1,11 @@
 final: prev:
 builtins.mapAttrs (n: v:
-    prev.callPackage (
+    final.callPackage (
       {
         nvfetcher-sources,
         python3Packages,
       }: (python3Packages.buildPythonPackage {
-        inherit (v.source) src pname version;
+        inherit (nvfetcher-sources.${n}) src pname version;
         doCheck = false;
         propagatedBuildInputs =
           v.propagatedBuildInputs
@@ -20,6 +20,6 @@ builtins.mapAttrs (n: v:
     propagatedBuildInputs = [];
   };
   flake8-isort = {
-    propagatedBuildInputs = [];
+    propagatedBuildInputs = with prev;[ flake8 isort ];
   };
 }
