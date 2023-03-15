@@ -19,17 +19,13 @@
     flake-utils,
     ...
   }:
-    {}
-    // (
+    (
       flake-utils.lib.eachSystem ["x86_64-linux" "x86_64-darwin"]
       (
         system: let
           pkgs =
             inputs.nixpkgs.legacyPackages.${system}.appendOverlays
-            [
-              inputs.poetry2nix.overlay
-              self.overlays.default
-            ];
+              (__attrValues self.overlays);
         in rec {
           devShells.default = with pkgs;
             mkShell {
@@ -66,6 +62,7 @@
       )
     )
     // {
+      overlays.poetry2nix = inputs.poetry2nix.overlay;
       overlays.default = final: prev: {
         my-poetry-packages = prev.callPackage ./poetry {};
         python3 =
