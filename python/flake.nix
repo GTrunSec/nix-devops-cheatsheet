@@ -25,7 +25,7 @@
         system: let
           pkgs =
             inputs.nixpkgs.legacyPackages.${system}.appendOverlays
-              (__attrValues self.overlays);
+            (__attrValues self.overlays);
         in rec {
           devShells.default = with pkgs;
             mkShell {
@@ -69,9 +69,13 @@
           prev.python3.override
           (
             old: {
-              packageOverrides = prev.lib.composeExtensions (old.packageOverrides or (_: _: {})) (selfPythonPackages: pythonPackages: {
-                py7zr = selfPythonPackages.callPackage ./nixpkgs/py7zr.nix {};
-              });
+              packageOverrides = prev.lib.composeManyExtensions [
+                (old.packageOverrides or (_: _: {}))
+                (import ./nixpkgs/overlays.nix)
+                (selfPythonPackages: pythonPackages: {
+                  py7zr = selfPythonPackages.callPackage ./nixpkgs/py7zr.nix {};
+                })
+              ];
             }
           );
       };
