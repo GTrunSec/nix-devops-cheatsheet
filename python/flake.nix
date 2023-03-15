@@ -54,11 +54,7 @@
     )
     // {
       overlays.default = final: prev: {
-        my-python-packages = final.poetry2nix.mkPoetryEnv {
-          projectDir = ./packages;
-          preferWheels = true;
-          python = prev.python3;
-        };
+        my-python-packages = prev.callPackage ./poetry {};
       };
     };
 }
