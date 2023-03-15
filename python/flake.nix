@@ -10,6 +10,8 @@
     };
     poetry2nix.url = "github:nix-community/poetry2nix";
     poetry2nix.inputs.nixpkgs.follows = "nixpkgs";
+    nix-init.url = "github:nix-community/nix-init";
+    nix-init.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs @ {
@@ -29,13 +31,20 @@
               self.overlays.default
             ];
         in rec {
-          devShell = with pkgs;
+          devShells.default = with pkgs;
             mkShell {
               buildInputs = [
                 poetry
                 nodePackages.pyright
                 nodePackages.node2nix
-                my-python-packages
+                my-poetry-packages
+              ];
+            };
+
+          devShells.init = with pkgs;
+            mkShell {
+              buildInputs = [
+                (inputs.nix-init.packages.${system}.default)
               ];
             };
 
@@ -44,6 +53,10 @@
               (pkgs.nodePackages)
               pyright
               node2nix
+              ;
+            inherit
+              (pkgs.python3.pkgs)
+              py7zr
               ;
           };
           hydraJobs = {
@@ -54,7 +67,16 @@
     )
     // {
       overlays.default = final: prev: {
-        my-python-packages = prev.callPackage ./poetry {};
+        my-poetry-packages = prev.callPackage ./poetry {};
+        python3 =
+          prev.python3.override
+          (
+            old: {
+              packageOverrides = prev.lib.composeExtensions (old.packageOverrides or (_: _: {})) (selfPythonPackages: pythonPackages: {
+                py7zr = selfPythonPackages.callPackage ./nixpkgs/py7zr.nix {};
+              });
+            }
+          );
       };
     };
 }
