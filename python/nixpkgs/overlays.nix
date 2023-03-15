@@ -3,8 +3,8 @@ builtins.mapAttrs (n: v:
     final.callPackage (
       {
         nvfetcher-sources,
-        python3Packages,
-      }: (python3Packages.buildPythonPackage {
+        buildPythonPackage,
+      }: (buildPythonPackage {
         inherit (nvfetcher-sources.${n}) src pname version;
         doCheck = false;
         propagatedBuildInputs =
