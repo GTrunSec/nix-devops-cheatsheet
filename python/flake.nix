@@ -3,55 +3,39 @@
 
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
-    nixpkgs.url = "github:NixOS/nixpkgs/release-22.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     flake-compat = {
       url = "github:edolstra/flake-compat";
       flake = false;
     };
-    pypi-deps-db = {
-      url = "github:DavHau/pypi-deps-db";
-      flake = false;
-    };
-    mach-nix = {
-      url = "github:DavHau/mach-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    poetry2nix.url = "github:nix-community/poetry2nix";
+    poetry2nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs @ {
     self,
-    nixpkgs,
     flake-utils,
-    flake-compat,
-    mach-nix,
-    pypi-deps-db,
+    ...
   }:
     {}
     // (
       flake-utils.lib.eachSystem ["x86_64-linux" "x86_64-darwin"]
       (
         system: let
-          pkgs = import nixpkgs {
-            inherit system;
-            overlays = [
-              (import ./node-packages)
-              self.overlay
+          pkgs =
+            inputs.nixpkgs.legacyPackages.${system}.appendOverlays
+            [
+              inputs.poetry2nix.overlay
+              self.overlays.default
             ];
-            config = {};
-          };
         in rec {
-          python-packages-custom = pkgs.machlib.mkPython rec {
-            requirements = ''
-              isort
-            '';
-          };
-
           devShell = with pkgs;
             mkShell {
               buildInputs = [
-                python-packages-custom
+                poetry
                 nodePackages.pyright
                 nodePackages.node2nix
+                my-python-packages
               ];
             };
 
@@ -61,9 +45,7 @@
               pyright
               node2nix
               ;
-            pthon-packages = python-packages-custom;
           };
-
           hydraJobs = {
             inherit packages;
           };
@@ -71,15 +53,12 @@
       )
     )
     // {
-      overlay = final: prev: {
-        machlib =
-          import mach-nix
-          {
-            pypiDataRev = pypi-deps-db.rev;
-            pypiDataSha256 = pypi-deps-db.narHash;
-            python = "python39";
-            pkgs = prev;
-          };
+      overlays.default = final: prev: {
+        my-python-packages = final.poetry2nix.mkPoetryEnv {
+          projectDir = ./packages;
+          preferWheels = true;
+          python = prev.python3;
+        };
       };
     };
 }
