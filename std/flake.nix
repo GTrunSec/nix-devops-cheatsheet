@@ -26,7 +26,7 @@
       "aarch64-linux"
       "aarch64-darwin"
     ];
-    __inputs__ = inputs.std-ext.x86_64-linux.common.lib.callFlakeSys ./lock {};
+    __inputs__ = inputs.std-ext.x86_64-linux.common.lib.callFlake ./lock {};
   in
     flake-parts.lib.mkFlake {
       inputs = inputs // __inputs__;
@@ -69,6 +69,7 @@
             name = "default";
             # packages = [pkgs.hello];
             imports = [
+              self.devenvModules.default
               self.devenvModules.lint
               self.devenvModules.rust
             ];
