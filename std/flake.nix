@@ -16,6 +16,7 @@
     std-ext.url = "github:gtrunsec/std-ext";
     std-ext.inputs.std.follows = "std";
     std-ext.inputs.nixpkgs.follows = "nixpkgs";
+    std-ext.inputs.org-roam-book-template.follows = "std/blank";
   };
   outputs = inputs @ {
     self,
