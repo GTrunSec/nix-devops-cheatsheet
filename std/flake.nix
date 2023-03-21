@@ -1,21 +1,79 @@
 {
+  description = "std && flake-parts && devenv template";
+
   inputs = {
-    std.url = "github:divnix/std";
-
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs";
+    devenv.url = "github:cachix/devenv";
 
-    cells-lab.url = "github:GTrunSec/cells-Lab";
+    std.url = "github:divnix/std";
+    std.inputs.nixpkgs.follows = "nixpkgs";
+    std-ext.url = "github:gtrunsec/std-ext";
+    std-ext.inputs.std.follows = "std";
+    std-ext.inputs.nixpkgs.follows = "nixpkgs";
   };
-  outputs = {std, ...} @ inputs:
-    std.growOn {
-      inherit inputs;
-      cellsFrom = ./cells;
-      organelles = [
-        (std.devshells "devshells")
-        (std.functions "library")
-        (std.functions "lib")
-      ];
+  outputs = inputs @ {
+    self,
+    flake-parts,
+    devenv,
+    nixpkgs,
+    ...
+  }: let
+    systems = [
+      "x86_64-linux"
+      "x86_64-darwin"
+      "aarch64-linux"
+      "aarch64-darwin"
+    ];
+    __inputs__ = inputs.std-ext.x86_64-linux.common.lib.callFlakeSys ./lock {};
+  in
+    flake-parts.lib.mkFlake {
+      inputs = inputs // __inputs__;
     } {
-      devShells = inputs.std.harvest inputs.self ["main" "devshells"];
+      inherit systems;
+      # Raw flake outputs (generally not system-dependent)
+      flake = {
+        inherit __inputs__;
+        devenvModules = inputs.std-ext.libs.digga.rakeLeaves ./devenvModules;
+      };
+      std.grow.cellsFrom = ./cells;
+      std.grow.cellBlocks = with inputs.std.blockTypes; [
+        #: lib
+        (functions "lib")
+        (nixago "nixago")
+        (installables "packages")
+
+        #: presets
+        (nixago "nixago")
+
+        (devshells "devshells")
+        (data "devshellsProfiles")
+        (nixago "nixago")
+      ];
+      imports = [
+        inputs.std.flakeModule
+        inputs.devenv.flakeModule
+      ];
+      # Flake outputs that will be split by system
+      perSystem = {
+        config,
+        pkgs,
+        inputs',
+        self',
+        ...
+      }: {
+        packages = import ./packages {inherit pkgs inputs';};
+        devenv.shells = {
+          default = {
+            name = "default";
+            # packages = [pkgs.hello];
+            imports = [
+              self.devenvModules.lint
+              self.devenvModules.rust
+            ];
+          };
+        };
+      };
     };
 }
