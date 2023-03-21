@@ -74,6 +74,10 @@
             description = "Say Hello";
             exec = "echo Hello";
           };
+          cliche = {
+            description = "Run cliche example";
+            exec = inputs.std-ext.${pkgs.system}.cliche.entrypoints.example;
+          };
           ponysay = {
             exec = pkgs.ponysay;
           };
@@ -83,10 +87,13 @@
           default = {
             name = "default";
             enterShell = config.mission-control.banner;
-            packages = [config.mission-control.wrapper];
+            packages = [
+              config.mission-control.wrapper
+              inputs.std-ext.${pkgs.system}.cliche.entrypoints.example
+            ];
             imports = [
               self.devenvModules.default
-              # self.devenvModules.lint
+              self.devenvModules.lint
               self.devenvModules.rust
             ];
           };
