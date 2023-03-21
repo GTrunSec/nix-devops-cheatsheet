@@ -6,7 +6,10 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs";
     devenv.url = "github:cachix/devenv";
-
+    devenv.inputs.nixpkgs.follows = "nixpkgs";
+    mission-control.url = "github:Platonic-Systems/mission-control";
+  };
+  inputs = {
     std.url = "github:divnix/std";
     std.inputs.nixpkgs.follows = "nixpkgs";
     std-ext.url = "github:gtrunsec/std-ext";
@@ -54,6 +57,7 @@
       imports = [
         inputs.std.flakeModule
         inputs.devenv.flakeModule
+        inputs.mission-control.flakeModule
       ];
       # Flake outputs that will be split by system
       perSystem = {
@@ -63,11 +67,20 @@
         self',
         ...
       }: {
+        mission-control.scripts = {
+          hello = {
+            description = "Say Hello";
+            exec = "echo Hello";
+          };
+          ponysay = {
+            exec = pkgs.ponysay;
+          };
+        };
         packages = import ./packages {inherit pkgs inputs';};
         devenv.shells = {
           default = {
             name = "default";
-            # packages = [pkgs.hello];
+            # packages = [config.mission-control];
             imports = [
               self.devenvModules.default
               self.devenvModules.lint
