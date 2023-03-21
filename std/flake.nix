@@ -8,6 +8,7 @@
     devenv.url = "github:cachix/devenv";
     devenv.inputs.nixpkgs.follows = "nixpkgs";
     mission-control.url = "github:Platonic-Systems/mission-control";
+    flake-root.url = "github:srid/flake-root";
   };
   inputs = {
     std.url = "github:divnix/std";
@@ -58,6 +59,7 @@
         inputs.std.flakeModule
         inputs.devenv.flakeModule
         inputs.mission-control.flakeModule
+        inputs.flake-root.flakeModule
       ];
       # Flake outputs that will be split by system
       perSystem = {
@@ -80,10 +82,11 @@
         devenv.shells = {
           default = {
             name = "default";
-            # packages = [config.mission-control];
+            enterShell = config.mission-control.banner;
+            packages = [config.mission-control.wrapper];
             imports = [
               self.devenvModules.default
-              self.devenvModules.lint
+              # self.devenvModules.lint
               self.devenvModules.rust
             ];
           };
