@@ -21,10 +21,10 @@
   };
   outputs = inputs @ {
     self,
-      flake-parts,
-      devenv,
-      nixpkgs,
-      ...
+    flake-parts,
+    devenv,
+    nixpkgs,
+    ...
   }: let
     systems = [
       "x86_64-linux"
@@ -41,10 +41,14 @@
       # Raw flake outputs (generally not system-dependent)
       flake = {
         inherit __inputs__;
-        devenvModules = (inputs.flops.lib.configs.haumea.setInit { src = ./devenvModules;
-                                                                   loader = inputs.flops.inputs.haumea.lib.loaders.path;
-                                                                 }
-        ).outputsForTarget "default";
+        devenvModules =
+          (
+            inputs.flops.lib.configs.haumea.setInit {
+              src = ./devenvModules;
+              loader = inputs.flops.inputs.haumea.lib.loaders.path;
+            }
+          )
+          .outputsForTarget "default";
       };
       std.grow.cellsFrom = ./cells;
       std.grow.cellBlocks = with inputs.std.blockTypes; [
@@ -69,10 +73,10 @@
       # Flake outputs that will be split by system
       perSystem = {
         config,
-          pkgs,
-          inputs',
-          self',
-          ...
+        pkgs,
+        inputs',
+        self',
+        ...
       }: {
         mission-control.scripts = {
           hello = {

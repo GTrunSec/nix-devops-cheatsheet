@@ -1,3 +1,6 @@
-{inputs, cell}: {
+{
+  inputs,
+  cell,
+}: {
   a = "1";
 }
