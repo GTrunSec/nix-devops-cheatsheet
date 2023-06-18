@@ -17,13 +17,14 @@
     std-ext.inputs.std.follows = "std";
     std-ext.inputs.nixpkgs.follows = "nixpkgs";
     std-ext.inputs.org-roam-book-template.follows = "std/blank";
+    flops.follows = "std-ext/flops";
   };
   outputs = inputs @ {
     self,
-    flake-parts,
-    devenv,
-    nixpkgs,
-    ...
+      flake-parts,
+      devenv,
+      nixpkgs,
+      ...
   }: let
     systems = [
       "x86_64-linux"
@@ -31,7 +32,7 @@
       "aarch64-linux"
       "aarch64-darwin"
     ];
-    __inputs__ = inputs.std-ext.x86_64-linux.common.lib.callFlake ./lock {};
+    __inputs__ = (inputs.std-ext.inputs.flops.inputs.call-flake ./lock).inputs;
   in
     flake-parts.lib.mkFlake {
       inputs = inputs // __inputs__;
@@ -40,7 +41,10 @@
       # Raw flake outputs (generally not system-dependent)
       flake = {
         inherit __inputs__;
-        devenvModules = inputs.std-ext.libs.digga.rakeLeaves ./devenvModules;
+        devenvModules = (inputs.flops.lib.configs.haumea.setInit { src = ./devenvModules;
+                                                                   loader = inputs.flops.inputs.haumea.lib.loaders.path;
+                                                                 }
+        ).outputsForTarget "default";
       };
       std.grow.cellsFrom = ./cells;
       std.grow.cellBlocks = with inputs.std.blockTypes; [
@@ -65,10 +69,10 @@
       # Flake outputs that will be split by system
       perSystem = {
         config,
-        pkgs,
-        inputs',
-        self',
-        ...
+          pkgs,
+          inputs',
+          self',
+          ...
       }: {
         mission-control.scripts = {
           hello = {

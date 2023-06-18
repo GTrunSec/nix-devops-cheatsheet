@@ -1,12 +1,12 @@
 {
-  outputs = {...} @ inputs: {
+  outputs = {...}: {
     templates = {
       rust = {
         description = "Rust Environment";
         path = ./rust;
       };
-      std = {
-        description = "Std Environment";
+      std-flakeParts-devenv = {
+        description = "Std && flake-parts && devenv Environment";
         path = ./std;
       };
       emacs = {

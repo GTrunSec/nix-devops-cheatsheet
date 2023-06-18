@@ -7,3 +7,4 @@ tmp/
 .direnv
 .nix-script-cache
 .devenv
+.pre-commit-config.yaml

@@ -3,4 +3,5 @@
 *.log
 tmp/
 
+/.pre-commit-config.yaml
 .pre-commit-config.yaml
