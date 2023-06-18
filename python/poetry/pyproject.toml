@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "python-csutom"
+version = "0.1.0"
+description = ""
+authors = ["guangtao <gtrunsec@hardenedlinux.org>"]
+readme = "README.md"
+packages = [{ include = "python_csutom" }]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+py7zr = "^0.20.4"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

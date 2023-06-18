@@ -1,0 +1,2 @@
+nvfetcher-update path:
+    nix develop github:GTrunSec/std-ext#devShells.x86_64-linux.update --refresh --command nvfetcher-update ./{{ path }}/sources.toml
