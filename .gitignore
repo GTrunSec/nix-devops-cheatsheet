@@ -8,3 +8,9 @@ tmp/
 .nix-script-cache
 .devenv
 .pre-commit-config.yaml
+
+# nixago: ignore-linked-files
+/lefthook.yml
+/.editorconfig
+/.conform.yaml
+/treefmt.toml

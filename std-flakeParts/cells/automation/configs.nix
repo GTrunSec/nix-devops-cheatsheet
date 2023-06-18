@@ -60,7 +60,7 @@ in {
     ];
     devshell.startup.prettier-plugin-toml =
       inputs.nixpkgs.lib.stringsWithDeps.noDepEntry
-        ''
+      ''
         export NODE_PATH=${inputs.nixpkgs.nodePackages.prettier-plugin-toml}/lib/node_modules:$NODE_PATH
       '';
     data = {
