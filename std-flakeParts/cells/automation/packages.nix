@@ -2,7 +2,7 @@
   inputs,
   cell,
 }: let
-  path = inputs.self + "/std-flakeParts/packages/_loader.nix";
+  path = inputs.self + "/packages/_loader.nix";
 in
   import path {
     inherit inputs;

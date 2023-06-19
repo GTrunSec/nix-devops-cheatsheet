@@ -4,7 +4,6 @@
 }:
 (inputs.flops.lib.configs.haumea.setInit {
   src = ./.;
-  loader = inputs.flops.inputs.haumea.lib.loaders.callPackage;
-  inputs = builtins.removeAttrs pkgs ["self" "super" "root"];
+  loader = _: path: pkgs.callPackage path {};
 })
 .outputsForTarget "default"

@@ -17,16 +17,20 @@
       };
       std-flakeParts-devenv = {
         description = "Std && flake-parts && devenv Environment";
-        path = ./std;
+        path = ./std-flake-parts-devenv;
+      };
+      std-flakeParts = {
+        description = "Std && flake-parts Environment";
+        path = ./std-flakeParts;
       };
       emacs = {
         description = "Emacs Environment";
         path = ./emacs;
       };
-      # python = {
-      #   description = "python Environment";
-      #   path = inputs.python.outPath;
-      # };
+      python = {
+        description = "python Environment";
+        path = inputs.python.outPath;
+      };
       julia = {
         description = "Julia Environment";
         path = inputs.julia.outPath;
