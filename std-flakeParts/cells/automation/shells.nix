@@ -23,13 +23,12 @@ in {
     # This is Standard's devshell integration.
     # It runs the startup hook when entering the shell.
     nixago = [
-      lib.cfg.conform
-      (lib.cfg.treefmt cell.configs.treefmt)
-      (lib.cfg.editorconfig cell.configs.editorconfig)
-      # (lib.cfg.githubsettings cell.configs.githubsettings)
-      (lib.cfg.lefthook cell.configs.lefthook)
+      inputs.std-ext.preset.nixago.conform
+      inputs.std-ext.preset.nixago.treefmt
+      inputs.std-ext.preset.nixago.editorconfig
+      inputs.std-ext.preset.nixago.lefthook
+      # inputs.std-ext.preset.nixago.githubsettings
     ];
-
     commands = [];
   };
 }

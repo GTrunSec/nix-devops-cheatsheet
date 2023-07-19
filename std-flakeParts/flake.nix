@@ -9,6 +9,8 @@
   inputs = {
     std.url = "github:divnix/std";
     std.inputs.nixpkgs.follows = "nixpkgs";
+    std.inputs.devshell.follows = "std-ext/devshell";
+    std.inputs.nixago.follows = "std-ext/nixago";
     std-ext.url = "github:gtrunsec/std-ext";
     std-ext.inputs.std.follows = "std";
     std-ext.inputs.nixpkgs.follows = "nixpkgs";
@@ -36,7 +38,7 @@
       # Raw flake outputs (generally not system-dependent)
       flake = {
         inherit __inputs__;
-        packages = inputs.std.harvest inputs.self [["automation" "packages"]];
+        # packages = inputs.std.harvest inputs.self [["automation" "packages"]];
       };
       std.grow.cellsFrom = ./cells;
       std.grow.cellBlocks = with inputs.std.blockTypes; [
