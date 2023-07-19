@@ -8,11 +8,11 @@
         "rust-analyzer-src": "rust-analyzer-src"
       },
       "locked": {
-        "lastModified": 1687069263,
-        "narHash": "sha256-24zZ2QhF5XnKUM2ecuJLH32fY9SYyM1+v6kAmw4pB7Y=",
+        "lastModified": 1689747703,
+        "narHash": "sha256-abwTXTz2u2P32fN9XRQKV+TUkcRZDfNIQ73mq9fyTxg=",
         "owner": "nix-community",
         "repo": "fenix",
-        "rev": "8e2127fcde2005afb37e25952846c97c96c54269",
+        "rev": "5e70fbab6c431bd8454d336ef06ef609f4d6e6f3",
         "type": "github"
       },
       "original": {
@@ -37,20 +37,36 @@
         "type": "github"
       }
     },
+    "process-compose-flake": {
+      "locked": {
+        "lastModified": 1689713813,
+        "narHash": "sha256-5xWoY8guwR9zDJPxFrKTCS2zwJZKdKH4zsioMvDr99E=",
+        "owner": "Platonic-Systems",
+        "repo": "process-compose-flake",
+        "rev": "12cf28de0ebe8c152ade041c4b3b8671438e21a0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Platonic-Systems",
+        "repo": "process-compose-flake",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "fenix": "fenix",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "process-compose-flake": "process-compose-flake"
       }
     },
     "rust-analyzer-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1686992290,
-        "narHash": "sha256-VJ/OYQPULSaMGPqUDaDKJUb3DrI7xMzuiSYMmljtpQo=",
+        "lastModified": 1689689012,
+        "narHash": "sha256-zC4p3/A34hio7uEAHlewOmSZkBWSKReSpplVuVHPrwo=",
         "owner": "rust-lang",
         "repo": "rust-analyzer",
-        "rev": "fcfc6afe0526123ff43086990356bf175664fdfa",
+        "rev": "3759c41d3c6966eb3aa18ad5916c0da65ff19641",
         "type": "github"
       },
       "original": {

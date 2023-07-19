@@ -1,5 +1,5 @@
 {
-  description = "std && flake-parts && devenv template";
+  description = "std && flake-parts' template";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -29,7 +29,7 @@
       "aarch64-linux"
       "aarch64-darwin"
     ];
-    __inputs__ = (inputs.std-ext.inputs.flops.inputs.call-flake ./lock).inputs;
+    __inputs__ = (inputs.flops.inputs.call-flake ./lock).inputs;
   in
     flake-parts.lib.mkFlake {
       inputs = inputs // __inputs__;
@@ -42,7 +42,7 @@
       };
       std.grow.cellsFrom = ./cells;
       std.grow.cellBlocks = with inputs.std.blockTypes; [
-        #data
+        # data
         (data "configs")
         #: lib
         (functions "lib")
