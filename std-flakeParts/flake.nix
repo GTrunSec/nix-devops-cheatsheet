@@ -56,6 +56,7 @@
       ];
       imports = [
         inputs.std.flakeModule
+        # __inputs__.process-compose-flake.flakeModule
       ];
       # Flake outputs that will be split by system
       perSystem = {
