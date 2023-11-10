@@ -1,3 +1,0 @@
-{
-  "*.md": "prettier --list-different"
-}

@@ -6,16 +6,24 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs";
   };
-  inputs = {
-    std.url = "github:divnix/std";
-    std.inputs.nixpkgs.follows = "nixpkgs";
-    std.inputs.devshell.follows = "std-ext/devshell";
-    std.inputs.nixago.follows = "std-ext/nixago";
-    std-ext.url = "github:gtrunsec/std-ext";
-    std-ext.inputs.std.follows = "std";
-    std-ext.inputs.nixpkgs.follows = "nixpkgs";
-    std-ext.inputs.org-roam-book-template.follows = "std/blank";
-    flops.follows = "std-ext/flops";
+    inputs = {
+    std = {
+      url = "github:divnix/std";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.devshell.follows = "devshell";
+      inputs.nixago.follows = "nixago";
+    };
+
+    nixago = {
+      url = "github:nix-community/nixago";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixago-exts.follows = "";
+    };
+
+    devshell = {
+      url = "github:numtide/devshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs = inputs @ {
     self,
@@ -29,15 +37,13 @@
       "aarch64-linux"
       "aarch64-darwin"
     ];
-    __inputs__ = (inputs.flops.inputs.call-flake ./lock).inputs;
   in
     flake-parts.lib.mkFlake {
-      inputs = inputs // __inputs__;
+      inherit inputs;
     } {
       inherit systems;
       # Raw flake outputs (generally not system-dependent)
       flake = {
-        inherit __inputs__;
         # packages = inputs.std.harvest inputs.self [["automation" "packages"]];
       };
       std.grow.cellsFrom = ./cells;
