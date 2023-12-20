@@ -34,6 +34,9 @@
         in rec {
           devShells.default = with pkgs;
             mkShell {
+              LD_LIBRARY_PATH = lib.makeLibraryPath [
+                pkgs.stdenv.cc.cc
+              ];
               buildInputs = [
                 poetry
                 nodePackages.pyright
