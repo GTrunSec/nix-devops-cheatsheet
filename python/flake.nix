@@ -68,7 +68,7 @@
       )
     )
     // {
-      overlays.poetry2nix = inputs.poetry2nix.overlay;
+      overlays.poetry2nix = inputs.poetry2nix.overlays.default;
       overlays.default = final: prev: {
         my-poetry-packages = prev.callPackage ./poetry {};
         nvfetcher-sources = import ./nixpkgs/_sources/generated.nix {
